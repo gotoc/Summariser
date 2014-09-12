@@ -1,11 +1,12 @@
-article_title = "News title goes here"
+article_title = "Title"
 
-article = """News article goes here"""
+article = """Article"""
 
-link_address = "Link to article goes here"
+link_address = "Link"
 
-from articles import article_title, article, link_address
+#from articles import article_title, article, link_address
 import random
+import math
 import re
 
 OUTPUT_HTML = True
@@ -14,12 +15,13 @@ regex = "(?<=[.!?])\s"
 stopwords = ["that","is","the","in","his","to","of","a","and","has","on","not",
              "he","said","had","it","-","by","be","as","this","who","or","for",
              "with","was","would","its","it's","he's","them","get","because",
-             "in","at","this","your"]
+             "in","at","this","your","news"]
 
 line_splits = article.split("\n")
 sentences = []
 for i in line_splits:
-    sentences += re.split(regex, i)
+    if i != "":
+        sentences += re.split(regex, i)
 
 
 #Extract keywords
@@ -55,6 +57,18 @@ def score_sentence(sentence, keywords):
             score += keywords[i.lower()]
     
     score /= len(sentence.split())
+    
+    idealLength = 15
+    sentenceLength = len(sentence.split())
+    if sentenceLength < idealLength:
+        lengthScore = math.log(15 - (idealLength - sentenceLength)) / 10
+    else:
+        lengthScore = 0.263
+    lengthScore -= 0.2
+    
+    print sentence, sentenceLength, lengthScore
+    
+    score += lengthScore
     
     return score
 
