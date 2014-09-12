@@ -1,10 +1,10 @@
-article_title = "Title"
+article_title = "title"
 
-article = """Article"""
+article = """article"""
 
-link_address = "Link"
+link_address = "link"
 
-#from articles import article_title, article, link_address
+from articles import article_title, article, link_address
 import random
 import math
 import re
@@ -15,7 +15,8 @@ regex = "(?<=[.!?])\s"
 stopwords = ["that","is","the","in","his","to","of","a","and","has","on","not",
              "he","said","had","it","-","by","be","as","this","who","or","for",
              "with","was","would","its","it's","he's","them","get","because",
-             "in","at","this","your","news"]
+             "in","at","this","your","news","could","i","those"]
+minimumLength = 5
 
 line_splits = article.split("\n")
 sentences = []
@@ -49,6 +50,11 @@ max_val = float(sorted(keywords.iteritems(), key=operator.itemgetter(1))[-1][1])
 for i in keywords:
     keywords[i] /= max_val
 
+def score_length(sentence):
+    if len(sentence.split()) < minimumLength:
+        return 0
+    return 1
+
 def score_sentence(sentence, keywords):
     score = 0.0
     
@@ -58,17 +64,9 @@ def score_sentence(sentence, keywords):
     
     score /= len(sentence.split())
     
-    idealLength = 15
-    sentenceLength = len(sentence.split())
-    if sentenceLength < idealLength:
-        lengthScore = math.log(15 - (idealLength - sentenceLength)) / 10
-    else:
-        lengthScore = 0.263
-    lengthScore -= 0.2
+    lengthScore = score_length(sentence)
     
-    print sentence, sentenceLength, lengthScore
-    
-    score += lengthScore
+    score *= lengthScore
     
     return score
 
