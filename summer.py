@@ -2,6 +2,8 @@ article_title = ""
 
 article = """"""
 
+link_address = ""
+
 #from articles import article_title, article, link_address
 import random
 import math
