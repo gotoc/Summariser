@@ -1,10 +1,8 @@
-article_title = "title"
+article_title = ""
 
-article = """article"""
+article = """"""
 
-link_address = "link"
-
-from articles import article_title, article, link_address
+#from articles import article_title, article, link_address
 import random
 import math
 import re
@@ -15,14 +13,17 @@ regex = "(?<=[.!?])\s"
 stopwords = ["that","is","the","in","his","to","of","a","and","has","on","not",
              "he","said","had","it","-","by","be","as","this","who","or","for",
              "with","was","would","its","it's","he's","them","get","because",
-             "in","at","this","your","news","could","i","those"]
-minimumLength = 5
+             "in","at","this","your","news"]
+             
+# stopwords discards frequent words from getting scored 
 
 line_splits = article.split("\n")
 sentences = []
 for i in line_splits:
     if i != "":
-        sentences += re.split(regex, i)
+        sentences += re.split(regex, i) 
+        
+# splits paragraphs into sentences by ! ? . and ...
 
 
 #Extract keywords
@@ -45,15 +46,14 @@ for i in sentences:
                 keywords[word] = 1
 
 #Normalise keywords
+
+for i in keywords:
+    keywords[i] = math.log(keywords[i]) + 1
+
 import operator
 max_val = float(sorted(keywords.iteritems(), key=operator.itemgetter(1))[-1][1])
 for i in keywords:
     keywords[i] /= max_val
-
-def score_length(sentence):
-    if len(sentence.split()) < minimumLength:
-        return 0
-    return 1
 
 def score_sentence(sentence, keywords):
     score = 0.0
@@ -64,9 +64,8 @@ def score_sentence(sentence, keywords):
     
     score /= len(sentence.split())
     
-    lengthScore = score_length(sentence)
-    
-    score *= lengthScore
+    if len(sentence.split()) < 5:
+        score = 0
     
     return score
 
