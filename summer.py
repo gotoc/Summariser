@@ -4,7 +4,7 @@ article = """"""
 
 link_address = ""
 
-#from articles import article_title, article, link_address
+from articles import article_title, article, link_address
 import random
 import math
 import re
@@ -15,7 +15,9 @@ regex = "(?<=[.!?])\s"
 stopwords = ["that","is","the","in","his","to","of","a","and","has","on","not",
              "he","said","had","it","-","by","be","as","this","who","or","for",
              "with","was","would","its","it's","he's","them","get","because",
-             "in","at","this","your","news"]
+             "in","at","this","your","news","could","i","those"]
+
+minimumLength = 5
              
 # stopwords discards frequent words from getting scored 
 
@@ -57,6 +59,11 @@ max_val = float(sorted(keywords.iteritems(), key=operator.itemgetter(1))[-1][1])
 for i in keywords:
     keywords[i] /= max_val
 
+def score_length(sentence):
+    if len(sentence.split()) < minimumLength:
+        return 0
+    return 1
+
 def score_sentence(sentence, keywords):
     score = 0.0
     
@@ -65,9 +72,8 @@ def score_sentence(sentence, keywords):
             score += keywords[i.lower()]
     
     score /= len(sentence.split())
-    
-    if len(sentence.split()) < 5:
-        score = 0
+    lengthScore = score_length(sentence)
+    score *= lengthScore
     
     return score
 
