@@ -26,11 +26,34 @@
     probability the article belongs in that category.
 """
 
+import sqlite3
+import sys
 
-article = u""""""
+def buildDB():
+    conn = sqlite3.connect("words.db")
+    
+    c = conn.cursor()
+    
+    c.executescript("""
+        CREATE TABLE words (
+            word TEXT PRIMARY KEY NOT NULL,
+            sport INTEGER NOT NULL,
+            not_sport INTEGER NOT NULL);
+        CREATE TABLE vars (
+            name TEXT PRIMARY KEY NOT NULL,
+            value INTEGER);
+        INSERT INTO vars (name, value) VALUES ("Total articles", 0)""")
+    
+    conn.commit()
+    conn.close()
 
-article = article.encode("ascii", errors='ignore')
-
-words = list(set(article.split()))
-
-print words
+if "-buildDB" in sys.argv:
+    buildDB()
+else:
+    article = u""""""
+    
+    article = article.encode("ascii", errors='ignore')
+    
+    words = list(set(article.split()))
+    
+    print words

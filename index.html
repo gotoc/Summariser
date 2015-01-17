@@ -10,6 +10,8 @@
                 padding: 0;
                 
                 font-family: 'Roboto', sans-serif;
+                
+                color: rgba(0,0,0,0.9);
             }
             
             #titleBar {
@@ -19,6 +21,7 @@
                 height: 80px;
                 background-color: rgb(133, 53, 219);
                 box-shadow: 0px 2px 3px rgba(133, 53, 219, 0.5);
+                z-index: 5;
             }
             
             .pageHeading {
@@ -43,6 +46,7 @@
             
             .newsItem > .wrapper {
                 padding: 20px;
+                position: relative;
             }
             
             .newsItem .image {
@@ -61,6 +65,21 @@
                 margin-bottom: 20px;
                 
             }
+            
+            .newsItem .newsLink {
+                position: absolute;
+                right: 20px;
+                top: 330px;
+            }
+            
+            .newsItem a {
+                color: rgba(0,0,255,0.9);
+                text-decoration: none;
+            }
+            
+            .newsItem a:hover {
+                text-decoration: underline;
+            }
         </style>
     </head>
     
@@ -72,40 +91,43 @@
         <div id="newsItems">
             <div class="newsItem">
                 <div class="wrapper">
-                    <h1>Title</h1>
+                    <h1>Family 'heartbroken' after British man appears in jihadist film</h1>
                     <div class="image"></div>
-                    <p>
-                        Lorem ipsum dolor sit amet, sonet mediocritatem est at, sed zril utroque te, ex tantas animal per. Veritus luptatum maiestatis te quo, cum ex sale veritus invidunt, no audiam viderer conceptam quo. Ei labore omittam pertinacia vel. Homero periculis philosophia eu sit, mei no verear volumus definitionem. Antiopam splendide eum ex.
-                    </p>
-                    <p>
-                        Qui everti recusabo no, autem eruditi sed an, usu ferri sapientem te. Ne mel labore tacimates suscipiantur, his te singulis sadipscing. Labore noluisse in mel, admodum recteque cum ea, ferri tritani dolorum ea mei. Quo feugait dignissim id, usu no phaedrum iracundia. Probo animal bonorum ne est.
-                    </p>
+                    <p>Asked about the video in which Nasser appears, he said: "I'm sad that he's gone without telling me he's going.</p>
+                    <p>His family raised concerns after his disappearance in March.</p>
+                    <p>The BBC has learned that tracking British jihadists fighting in Syria is now the top priority for MI5.</p>
+                    
+                    <div class="newsLink">
+                        <a href=' http://www.bbc.co.uk/news/uk-27952874 '>Read more at BBC</a>
+                    </div>
                 </div>
             </div>
             
             <div class="newsItem">
                 <div class="wrapper">
-                    <h1>Title</h1>
+                    <h1>Austrian GP: Valtteri Bottas fastest in final practice</h1>
                     <div class="image" style="background-color: #1D9FF0"></div>
-                    <p>
-                        Lorem ipsum dolor sit amet, mel enim lobortis qualisque te, pro te blandit eloquentiam, per no facete mentitum democritum. Eu noluisse efficiantur nec. Cum ut adhuc solum sadipscing, his appareat percipit recusabo ut, ut qui sapientem sententiae. Te tota melius aeterno ius, cum dolores assentior eu. Possit virtute nusquam qui in, at impedit posidonium his.
-                    </p>
-                    <p>
-                        Ius dicta labitur id, id cum solet perfecto. Diceret perfecto ea vis. Sit vide deserunt te, his cetero molestie cu. Laoreet sapientem scribentur qui ei, saepe maluisset eam id.
-                    </p>
+                    <p>"I think Mercedes still have a bit of an advantage but Williams could well be on the second row behind them."</p>
+                    <p>Toro Rosso's Daniil Kvyat took fourth, ahead of Mercedes' Nico Rosberg and Ferrari's Fernando Alonso.</p>
+                    <p>Williams' Valtteri Bottas narrowly beat Lewis Hamilton's Mercedes in final practice at the Austrian Grand Prix.</p>
+                    
+                    <div class="newsLink">
+                        <a href=' http://www.bbc.co.uk/sport/0/formula1/27954204 '>Read more at BBC</a>
+                    </div>
                 </div>
             </div>
             
             <div class="newsItem">
                 <div class="wrapper">
-                    <h1>Title</h1>
+                    <h1>New open-source router firmware opens your Wi-Fi network to strangers</h1>
                     <div class="image" style="background-color: #28C732"></div>
-                    <p>
-                        Lorem ipsum dolor sit amet, ut ius cibo similique, ullum argumentum duo cu. Nam ne eius sale, harum bonorum perfecto vel eu, nec mundi quaeque hendrerit ei. Quo fugit admodum mnesarchum ne. Sonet epicuri sententiae usu ad, ex numquam voluptatum his. Vidisse accusam nam ne, novum veniam periculis ad nec. Ad mel summo postea platonem.
-                    </p>
-                    <p>
-                        Vix cu alia admodum intellegam, nemore salutandi democritum sed an. Omnis eirmod mei et. Postea deserunt per et, vis te quando bonorum nominati. Has ad solet abhorreant, an noster audiam minimum nam. Id dictas appareat nec, ne his alia ignota definiebas, assum causae alterum vis at.
-                    </p>
+                    <p>One such technology, which EFF plans to unveil at the Hackers on Planet Earth (HOPE X) conference next month, is open-sourced router firmware called Open Wireless Router.</p>
+                    <p>Additionally, EFF hopes that opening one's Wi-Fi network will, in the long run, make it more difficult to tie an IP address to an individual.</p>
+                    <p>Even though various flaws have been exposed, there have not been many fixes."</p>
+                    
+                    <div class="newsLink">
+                        <a href=' http://arstechnica.com/tech-policy/2014/06/new-router-firmware-safely-opens-your-wi-fi-network-to-strangers/ '>Read more at Ars Technica</a>
+                    </div>
                 </div>
             </div>
         </div>
