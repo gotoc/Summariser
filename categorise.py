@@ -36,7 +36,8 @@ def buildDB():
     
     c.executescript("""
         CREATE TABLE words (
-            word TEXT PRIMARY KEY NOT NULL,
+            word_id INTEGER PRIMARY KEY NOT NULL,
+            word TEXT NOT NULL,
             sport INTEGER NOT NULL,
             not_sport INTEGER NOT NULL);
         CREATE TABLE vars (
@@ -50,10 +51,29 @@ def buildDB():
 if "-buildDB" in sys.argv:
     buildDB()
 else:
-    article = u""""""
+    filepath = raw_input("Path to file: ")
+    category = raw_input("Is it a sports article? [Y/N] ")
     
-    article = article.encode("ascii", errors='ignore')
-    
-    words = list(set(article.split()))
-    
-    print words
+    if category.lower() in ["y","n"]:
+        with open(filepath, "r") as article_file:
+            article = article_file.read()
+            
+            article = article.encode("ascii", errors='ignore')
+            
+            words = list(set(article.split()))
+            
+            print words
+
+
+
+
+
+
+
+
+
+
+
+
+
+
