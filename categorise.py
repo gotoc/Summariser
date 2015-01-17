@@ -31,13 +31,12 @@ import sys
 
 def buildDB():
     conn = sqlite3.connect("words.db")
-    
     c = conn.cursor()
     
     c.executescript("""
         CREATE TABLE words (
             word_id INTEGER PRIMARY KEY NOT NULL,
-            word TEXT NOT NULL,
+            word TEXT UNIQUE NOT NULL,
             sport INTEGER NOT NULL,
             not_sport INTEGER NOT NULL);
         CREATE TABLE vars (
@@ -48,11 +47,37 @@ def buildDB():
     conn.commit()
     conn.close()
 
+def insert_words(words, category):
+    """Insert words into database if not already existing,
+    then increment the correct column"""
+    
+    #Turn list of words into tuple
+    words = tuple([(i,) for i in words])
+    
+    conn = sqlite3.connect("words.db")
+    c = conn.cursor()
+    
+    c.executemany("INSERT OR IGNORE INTO words (word, sport, not_sport) VALUES (?, 0, 0)", words)
+    
+    if category == "y":
+        c.executemany("UPDATE words SET sport = (sport + 1) WHERE word = ?", words)
+    if category == "n":
+        c.executemany("UPDATE words SET not_sport = (not_sport + 1) WHERE word = ?", words)
+    
+    c.execute("UPDATE vars SET value = (value + 1) WHERE name == \"Total articles\"")
+    
+    
+    conn.commit()
+    conn.close()
+
 if "-buildDB" in sys.argv:
     buildDB()
 else:
-    filepath = raw_input("Path to file: ")
-    category = raw_input("Is it a sports article? [Y/N] ")
+    #filepath = raw_input("Path to file: ")
+    #category = raw_input("Is it a sports article? [Y/N] ")
+    
+    filepath = "../articles/article1.txt"
+    category = "n"
     
     if category.lower() in ["y","n"]:
         with open(filepath, "r") as article_file:
@@ -60,9 +85,11 @@ else:
             
             article = article.encode("ascii", errors='ignore')
             
+            article = article.replace(".","").replace("?","").replace("!","").replace(",","")
+            
             words = list(set(article.split()))
             
-            print words
+            insert_words(words, category)
 
 
 
